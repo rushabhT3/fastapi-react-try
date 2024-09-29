@@ -1,3 +1,4 @@
-```uvicorn app.main:app --reload
+```bash
+uvicorn app.main:app --reload
 ```
 
