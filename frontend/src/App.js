@@ -6,8 +6,8 @@ function App() {
 
   useEffect(() => {
     const getMessage = async () => {
-      const data = await fetchMessage();
-      setMessage(data.message);
+      const { message } = await fetchMessage();
+      setMessage(message);
     };
 
     getMessage();
@@ -16,7 +16,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <p>{message}</p>
+        <p>{!!message ? message : "Loading"}</p>
       </header>
     </div>
   );
