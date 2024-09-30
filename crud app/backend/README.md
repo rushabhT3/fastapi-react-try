@@ -1,5 +1,7 @@
 # Some Info
 
+Uvicorn is an ASGI (Asynchronous Server Gateway Interface) web server implementation for Python. It is designed to serve fast, asynchronous web applications.
+
 ## To Run
 - Create a virtual environment Navigate to your project directory and create a new virtual environment. You can name it anything you like, but in this example, we’ll call it venv:
 ```virtualenv venv
