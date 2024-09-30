@@ -1,33 +1,27 @@
-# 1. **API Request Flow**:
-#    - Incoming data is validated against Pydantic models.
-#    - Valid data is then used to create or update SQLAlchemy model instances.
+# Some Info
 
-# 2. **API Response Flow**:
-#    - Data retrieved from the database (SQLAlchemy models) is converted to Pydantic models.
-#    - Pydantic models are then serialized to JSON for API responses.
+## 1. API Request Flow
+- Incoming data is validated against Pydantic models.
+- Valid data is then used to create or update SQLAlchemy model instances.
 
-
+## 2. API Response Flow
+- Data retrieved from the database (SQLAlchemy models) is converted to Pydantic models.
+- Pydantic models are then serialized to JSON for API responses.
 
 ## Serialization and Deserialization
 
-# Serialization and deserialization are processes of converting data between different formats. In the context of web APIs:
+Serialization and deserialization are processes of converting data between different formats. In the context of web APIs:
 
-# - **Serialization**: Converting Python objects (like ORM models) into a format that can be easily transmitted or stored, typically JSON.
-# - **Deserialization**: Converting received data (typically JSON) into Python objects that your application can work with.
+- **Serialization**: Converting Python objects (like ORM models) into a format that can be easily transmitted or stored, typically JSON.
+- **Deserialization**: Converting received data (typically JSON) into Python objects that your application can work with.
 
+### Between JSON and Database
 
-
-Between JSON and Database:
-
-Pydantic acts as an intermediary layer.
-It ensures that data going into the database is valid and properly formatted.
-When retrieving data from the database, it helps structure the data for consistent API responses.
-
+Pydantic acts as an intermediary layer. It ensures that data going into the database is valid and properly formatted. When retrieving data from the database, it helps structure the data for consistent API responses.
 
 ## What is a Session?
 
 A SQLAlchemy Session is an object that manages database connections and transactions. It's the primary interface for persisting and loading data in SQLAlchemy ORM.
-
 
 ## How Session is Used in Your FastAPI App
 
