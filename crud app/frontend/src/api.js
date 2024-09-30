@@ -16,3 +16,13 @@ export const fetchItemById = async (id) => {
   const response = await axios.get(`${API_URL}/items/${id}`);
   return response.data;
 };
+
+export const updateItem = async (id, item) => {
+  const response = await axios.put(`${API_URL}/items/${id}`, item);
+  return response.data;
+};
+
+export const deleteItem = async (id) => {
+  const response = await axios.delete(`${API_URL}/items/${id}`);
+  return response.data;
+};

@@ -1,11 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { fetchItems, createItem, fetchItemById } from "./api";
+import {
+  fetchItems,
+  createItem,
+  fetchItemById,
+  updateItem,
+  deleteItem,
+} from "./api";
 
 function App() {
   const [items, setItems] = useState([]);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [selectedItem, setSelectedItem] = useState(null);
+  const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
     const getItems = async () => {
@@ -18,15 +25,44 @@ function App() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const newItem = await createItem({ title, description });
-    setItems([...items, newItem]);
+    if (isEditing) {
+      const updatedItem = await updateItem(selectedItem.id, {
+        title,
+        description,
+      });
+      setItems(
+        items.map((item) => (item.id === updatedItem.id ? updatedItem : item))
+      );
+      setIsEditing(false);
+    } else {
+      const newItem = await createItem({ title, description });
+      setItems([...items, newItem]);
+    }
     setTitle("");
     setDescription("");
+    setSelectedItem(null);
   };
 
   const handleItemClick = async (id) => {
     const item = await fetchItemById(id);
     setSelectedItem(item);
+    setTitle(item.title);
+    setDescription(item.description || "");
+    setIsEditing(false);
+  };
+
+  const handleEditClick = () => {
+    setIsEditing(true);
+  };
+
+  const handleDeleteClick = async () => {
+    if (selectedItem) {
+      await deleteItem(selectedItem.id);
+      setItems(items.filter((item) => item.id !== selectedItem.id));
+      setSelectedItem(null);
+      setTitle("");
+      setDescription("");
+    }
   };
 
   return (
@@ -45,7 +81,9 @@ function App() {
             onChange={(e) => setDescription(e.target.value)}
             placeholder="Description"
           />
-          <button type="submit">Add Item</button>
+          <button type="submit">
+            {isEditing ? "Update Item" : "Add Item"}
+          </button>
         </form>
         <div style={{ display: "flex" }}>
           <ul style={{ flex: 1 }}>
@@ -61,6 +99,8 @@ function App() {
               <p>ID: {selectedItem.id}</p>
               <p>Title: {selectedItem.title}</p>
               <p>Description: {selectedItem.description}</p>
+              <button onClick={handleEditClick}>Edit</button>
+              <button onClick={handleDeleteClick}>Delete</button>
             </div>
           )}
         </div>
