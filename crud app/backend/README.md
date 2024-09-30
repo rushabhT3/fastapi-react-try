@@ -20,7 +20,9 @@ source ./venv/Scripts/activate
 ```bash
 source venv/bin/activate
 ```
-- ```bash
+
+following meaning that app folder contains main.py which will have the app instance that needs to run
+```bash
 uvicorn app.main:app --reload```
 
 ## 1. API Request Flow
