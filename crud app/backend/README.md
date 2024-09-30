@@ -1,5 +1,23 @@
 # Some Info
 
+## To Run
+- Create a virtual environment Navigate to your project directory and create a new virtual environment. You can name it anything you like, but in this example, we’ll call it venv:
+```virtualenv venv
+```
+Activate the virtual environment Now, you can activate the virtual environment using the following command:
+*On Windows:*
+```source ./venv/Scripts/activate
+```
+**On powershell:**
+```
+ venv\Scripts\activate
+```
+*On Unix or MacOS:*
+```source venv/bin/activate
+```
+- ```bash
+uvicorn app.main:app --reload```
+
 ## 1. API Request Flow
 - Incoming data is validated against Pydantic models.
 - Valid data is then used to create or update SQLAlchemy model instances.
