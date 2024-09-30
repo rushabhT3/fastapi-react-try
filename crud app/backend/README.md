@@ -4,21 +4,27 @@ Uvicorn is an ASGI (Asynchronous Server Gateway Interface) web server implementa
 
 ## To Run
 - Create a virtual environment Navigate to your project directory and create a new virtual environment. You can name it anything you like, but in this example, we’ll call it venv:
-```virtualenv venv
+```bash
+virtualenv venv
 ```
 Activate the virtual environment Now, you can activate the virtual environment using the following command:
 *On Windows:*
-```source ./venv/Scripts/activate
+```bash
+source ./venv/Scripts/activate
 ```
 **On powershell:**
-```
+```bash
  venv\Scripts\activate
 ```
 *On Unix or MacOS:*
-```source venv/bin/activate
+```bash
+source venv/bin/activate
 ```
-- ```bash
-uvicorn app.main:app --reload```
+
+Following meaning that app folder contains main.py which will have the app instance that needs to run
+```bash
+uvicorn app.main:app --reload
+```
 
 ## 1. API Request Flow
 - Incoming data is validated against Pydantic models.
