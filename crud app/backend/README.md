@@ -21,7 +21,7 @@ source ./venv/Scripts/activate
 source venv/bin/activate
 ```
 
-following meaning that app folder contains main.py which will have the app instance that needs to run
+Following meaning that app folder contains main.py which will have the app instance that needs to run
 ```bash
 uvicorn app.main:app --reload
 ```
