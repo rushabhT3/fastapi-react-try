@@ -26,6 +26,8 @@ class AnimalCreate(AnimalBase):
 # Model for an animal with an ID, inherits from AnimalBase
 class Animal(BaseModel):
     id: int  
+    name: str
+    species: str
 
     class Config:
         # Allows the model to be populated from ORM objects or other objects with attributes

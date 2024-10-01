@@ -9,7 +9,7 @@ class UserInDB(Base):
     username = Column(String, unique=True, index=True)
     hashed_password = Column(String)
 
-class Animal(Base):
+class AnimalInDB(Base):
     __tablename__ = "animals"
 
     id = Column(Integer, primary_key=True, index=True)
