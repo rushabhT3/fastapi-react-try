@@ -22,3 +22,27 @@ def create_animal(db: Session, animal: schemas.AnimalCreate):
 
 def get_animals(db: Session, skip: int = 0, limit: int = 100):
     return db.query(models.AnimalInDB).offset(skip).limit(limit).all()
+
+def add_favorite_animal(db: Session, user_id: int, animal_id: int):
+    user = db.query(models.UserInDB).filter(models.UserInDB.id == user_id).first()
+    animal = db.query(models.AnimalInDB).filter(models.AnimalInDB.id == animal_id).first()
+    if user and animal:
+        user.favorite_animals.append(animal)
+        db.commit()
+        return True
+    return False
+
+def remove_favorite_animal(db: Session, user_id: int, animal_id: int):
+    user = db.query(models.UserInDB).filter(models.UserInDB.id == user_id).first()
+    animal = db.query(models.AnimalInDB).filter(models.AnimalInDB.id == animal_id).first()
+    if user and animal and animal in user.favorite_animals:
+        user.favorite_animals.remove(animal)
+        db.commit()
+        return True
+    return False
+
+def get_favorite_animals(db: Session, user_id: int):
+    user = db.query(models.UserInDB).filter(models.UserInDB.id == user_id).first()
+    if user:
+        return user.favorite_animals
+    return []

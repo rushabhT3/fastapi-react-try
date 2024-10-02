@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-function Login() {
+const API_URL = process.env.REACT_APP_API_URL;
+
+function Login({ setToken }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -10,11 +12,12 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(
-        `${process.env.REACT_APP_API_URL}/login`,
-        { username, password }
-      );
-      localStorage.setItem("token", response.data.access_token);
+      const { data } = await axios.post(`${API_URL}/login`, {
+        username,
+        password,
+      });
+      localStorage.setItem("token", data.access_token);
+      setToken(data.access_token);
       navigate("/profile");
     } catch (error) {
       console.error("Login failed", error);
@@ -22,8 +25,8 @@ function Login() {
   };
 
   return (
-    <div className="flex h-screen bg-gray-100">
-      <div className="flex flex-col justify-center items-center w-full md:w-1/2 lg:w-1/3">
+    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+      <div className="w-full max-w-md">
         <form
           onSubmit={handleSubmit}
           className="bg-white rounded-lg shadow-md p-8 w-full max-w-sm"

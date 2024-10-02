@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 function Signup() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -9,9 +11,8 @@ function Signup() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log({ username, password }); // Replace with actual signup logic
     try {
-      await axios.post(`${process.env.REACT_APP_API_URL}/signup`, {
+      await axios.post(`${API_URL}/signup`, {
         username,
         password,
       });
@@ -22,8 +23,8 @@ function Signup() {
   };
 
   return (
-    <div className="flex h-screen bg-gray-100">
-      <div className="flex flex-col justify-center items-center w-full md:w-1/2 lg:w-1/3">
+    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+      <div className="w-full max-w-md">
         <form
           onSubmit={handleSubmit}
           className="bg-white rounded-lg shadow-md p-8 w-full max-w-sm"
